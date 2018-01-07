@@ -37,15 +37,13 @@ This version of the specification is generated from
 For the full historical changelog, see
 https://github.com/matrix-org/matrix-doc/blob/master/changelogs/client_server.rst
 
-If this is an unstable snapshot, any changes since the last release may be
-viewed using ``git log``.
-
 Other versions of this specification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following other versions are also available, in reverse chronological order:
 
-- `HEAD <https://matrix.org/speculator/spec/HEAD/client_server/unstable.html>`_: Includes all changes since the latest versioned release.
+- `HEAD <https://matrix.org/docs/spec/client_server/unstable.html>`_: Includes all changes since the latest versioned release.
+- `r0.3.0 <https://matrix.org/docs/spec/client_server/r0.3.0.html>`_
 - `r0.2.0 <https://matrix.org/docs/spec/client_server/r0.2.0.html>`_
 - `r0.1.0 <https://matrix.org/docs/spec/client_server/r0.1.0.html>`_
 - `r0.0.1 <https://matrix.org/docs/spec/r0.0.1/client_server.html>`_
@@ -171,8 +169,8 @@ Client Authentication
 
 Most API endpoints require the user to identify themselves by presenting
 previously obtained credentials in the form of an ``access_token`` query
-parameter. An access token is typically obtained via the `Login`_ or
-`Registration`_ processes.
+parameter or through an Authorization Header of ``Bearer $access_token``.
+An access token is typically obtained via the `Login`_ or `Registration`_ processes.
 
 When credentials are required but missing or invalid, the HTTP call will
 return with a status of 401 and the error code, ``M_MISSING_TOKEN`` or
@@ -786,6 +784,11 @@ This is independent of any information kept by any Identity Servers.
 
 {{administrative_contact_cs_http_api}}
 
+Current account information
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+{{whoami_cs_http_api}}
+
 Pagination
 ----------
 
@@ -1332,13 +1335,23 @@ Listing rooms
 
 {{list_public_rooms_cs_http_api}}
 
+
+User Data
+---------
+
+User Directory
+~~~~~~~~~~~~~~
+
+{{users_cs_http_api}}
+
+
 Profiles
---------
+~~~~~~~~
 
 {{profile_cs_http_api}}
 
 Events on Change of Profile Information
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++++++++++++++++++++++
 Because the profile display name and avatar information are likely to be used in
 many places of a client's display, changes to these fields cause an automatic
 propagation event to occur, informing likely-interested parties of the new
